@@ -1,0 +1,12 @@
+{
+  "greeting": "Hello",
+  "contact": {
+    "firstName": "First name",
+    "lastName": "Last name",
+    "address": {
+      "street": "Street",
+      "zip": "Zip code",
+      "city": "City"
+    }
+  }
+}

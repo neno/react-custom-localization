@@ -1,0 +1,12 @@
+{
+  "greeting": "Hallo",
+  "contact": {
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "address": {
+      "street": "Straße",
+      "zip": "PLZ",
+      "city": "Stadt"
+    }
+  }
+}

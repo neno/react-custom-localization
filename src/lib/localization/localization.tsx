@@ -13,5 +13,7 @@ export async function translate(
   const translations = await getTranslations(language as LanguageCode);
   console.log('translate', translations);
 
-  return translations[key] || key;
+  return translations[key] ?? key;
 }
+
+('contact.form.name');
