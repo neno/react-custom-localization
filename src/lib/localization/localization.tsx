@@ -1,9 +1,9 @@
 import { LanguageCode, Translations } from './localization.types';
 
 async function getTranslations(lang: LanguageCode): Promise<Translations> {
-  const response = await fetch(`/locales/${lang}/globals.json`);
-  const translations = await response.json();
-  return translations;
+  return import(`../../locales/${lang}/globals.json`).then(
+    ({ default: translations }) => translations
+  );
 }
 
 export async function translate(
@@ -11,5 +11,7 @@ export async function translate(
   language: string
 ): Promise<string> {
   const translations = await getTranslations(language as LanguageCode);
+  console.log('translate', translations);
+
   return translations[key] || key;
 }
