@@ -1,32 +1,47 @@
 import en from '../../locales/en.json';
 import de from '../../locales/de.json';
 
+// setLanguage via props
+// setLanguage with context
+
 console.log('en', en);
-console.log('de', de);
+// console.log('de', de);
 
-const translationMap = new Map();
-translationMap.set('en', en);
-translationMap.set('de', de);
-
-function createMap(lang: string, translations: Record<string, string | Record<string, string>>) {
-  for (const key in translations) {
-    const value = translations[key];
+function createMap(translations: Record<string, any>) {
+  const map = new Map();
+  Object.entries(translations).forEach(([key, value]) => {
     if (typeof value === 'string') {
-      translationMap.set(`${lang}.${key}`, value);
-    } else if (typeof value === 'object') {
-      createMap(`${lang}.${key}`, value);
+      map.set(key, value);
+    } else {
+      const nestedMap = createMap(value);
+      map.set(key, nestedMap);
     }
-  }
+  });
+  return map;
 }
 
-// function flattenTranslations() {
-//   'contact.form.firstName': 'First Name',
-// }
+const translationMap = createMap(en);
 
-createMap('en', en);
-createMap('de', de);
+export function createFlattenedTranslationMap(
+  translations: Record<string, any>,
+  prevKey: string = '',
+  map: Map<string, any> = new Map()
+) {
+  for (const entry in translations) {
+    const newKey = prevKey ? `${prevKey}.${entry}` : entry;
+    if (typeof translations[entry] === 'string') {
+      map.set(newKey, translations[entry]);
+    } else {
+      createFlattenedTranslationMap(translations[entry], newKey, map);
+    }
+  }
+  return map;
+}
+
+const translationMapFlattened = createFlattenedTranslationMap(en);
 
 export function translate(key: string, language: string): string {
-  const translations = translationMap.get(language);
-  return translations[key] ?? key;
+  // console.log('translationMap', translationMap);
+  console.log('translationMapFlattened', translationMapFlattened);
+  return translationMapFlattened.get(key) ?? key;
 }

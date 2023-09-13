@@ -1,50 +1,55 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import { translate } from './lib/localization/localization';
+import { useLocalization } from './lib/localization/useLocalization';
 
-function App() {
-  // const [greetingEn, setGreetingEn] = useState('');
-  // const [greetingDe, setGreetingDe] = useState('');
+interface AppProps {
+  lang?: string;
+}
 
-  // useEffect(() => {
-  //   translate('greeting', 'en').then((translation) => {
-  //     console.log('greeting - en', translation);
+function App({ lang = 'de' }: AppProps) {
+  const [currentLanguage, setCurrentLanguage] = useState(lang);
+  const [translatableKeys, setTranslatableKeys] = useState<{
+    [key: string]: string;
+  }>({});
+  const { translate: translateFromHook } = useLocalization(currentLanguage);
 
-  //     setGreetingEn(translation);
-  //   });
-  //   translate('greeting', 'de').then((translation) =>
-  //     setGreetingDe(translation)
-  //   );
-  // }, []);
+  async function goAndTranslate(key: string) {
+    const translation = await translate(key, currentLanguage);
+    setTranslatableKeys((prev) => ({
+      ...prev,
+      [key]: translation,
+    }));
+  }
+
+  function getTranslation(key: string) {
+    const translation = translatableKeys[key];
+    if (!translation) {
+      goAndTranslate(key);
+      return key;
+    }
+    return translation;
+  }
 
   return (
     <div className='App'>
       <h1>Localizations</h1>
-      <section>
-        {/* <h2>Simple Translations</h2>
-        <table>
-          <thead>
-            <tr>
-              <td>Key</td>
-              <td>English</td>
-              <td>German</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>greeting</th>
-              <td>{translate("contact.form", "en")}</td>
-            </tr>
-          </tbody>
-        </table> */}
-      </section>
+      <section></section>
       <section>
         <h2>Nested translations</h2>
         <form action=''>
           <p>
             <label>
-              {(translate('contact.firstName', 'de'))}
+              {translate('contact.firstName', currentLanguage)}
               <input type='text' name='firstName' id='firstName' />
+            </label>
+            <label>
+              {getTranslation('contact.lastName')}
+              <input type='text' name='lastName' id='lastName' />
+            </label>
+            <label>
+              {translateFromHook('contact.address.city')}
+              <input type='text' name='city' id='city' />
             </label>
           </p>
         </form>
