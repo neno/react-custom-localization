@@ -26,7 +26,8 @@ function createMap(lang: string, translations: Record<string, string | Record<st
 createMap('en', en);
 createMap('de', de);
 
+console.log('translationMap', translationMap);
+
 export function translate(key: string, language: string): string {
-  const translations = translationMap.get(language);
-  return translations[key] ?? key;
+  return translationMap.get(`${language}.${key}`) ?? key;
 }
