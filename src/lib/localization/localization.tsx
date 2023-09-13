@@ -1,7 +1,7 @@
 import { LanguageCode, Translations } from './localization.types';
 
 async function getTranslations(lang: LanguageCode): Promise<Translations> {
-  return import(`../../locales/${lang}/globals.json`).then(
+  return import(`../../locales/${lang}.json`).then(
     ({ default: translations }) => translations
   );
 }
