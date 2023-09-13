@@ -33,8 +33,7 @@ function App() {
           <tbody>
             <tr>
               <th>greeting</th>
-              <td>{greetingEn}</td>
-              <td>{greetingDe}</td>
+              <td>{translate("contact.form", "en")}</td>
             </tr>
           </tbody>
         </table> */}
@@ -44,7 +43,7 @@ function App() {
         <form action=''>
           <p>
             <label>
-              {JSON.stringify(translate('contact', 'en'))}
+              {(translate('contact.firstName', 'de'))}
               <input type='text' name='firstName' id='firstName' />
             </label>
           </p>

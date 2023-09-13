@@ -9,18 +9,22 @@ translationMap.set('en', en);
 translationMap.set('de', de);
 
 function createMap(lang: string, translations: Record<string, string | Record<string, string>>) {
-  for (const props in translations) {
-    const {key, value} = props;
+  for (const key in translations) {
+    const value = translations[key];
     if (typeof value === 'string') {
       translationMap.set(`${lang}.${key}`, value);
+    } else if (typeof value === 'object') {
+      createMap(`${lang}.${key}`, value);
     }
-    createMap(`${lang}.${key}`, value);
   }
 }
 
-function flattenTranslations() {
-  'contact.form.firstName': 'First Name',
-}
+// function flattenTranslations() {
+//   'contact.form.firstName': 'First Name',
+// }
+
+createMap('en', en);
+createMap('de', de);
 
 export function translate(key: string, language: string): string {
   const translations = translationMap.get(language);
