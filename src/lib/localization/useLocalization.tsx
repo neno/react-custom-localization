@@ -16,9 +16,9 @@ export function useLocalization(
   );
 
   useEffect(() => {
-    if (!lang) return;
+    if (!currentLang) return;
 
-    import(`../../locales/${lang}.json`).then((translations) => {
+    import(`../../locales/${currentLang}.json`).then((translations) => {
       if (!translations) {
         setCurrentLang(import.meta.env.VITE_DEFAULT_LANG as string);
         return;
