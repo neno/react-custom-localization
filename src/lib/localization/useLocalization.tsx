@@ -10,6 +10,7 @@ export function useLocalization(
   lang = getBrowserLang(),
   userTranslations = {}
 ) {
+  const [currentLang, setCurrentLang] = useState<string>(lang);
   const [translationMap, setTranslationMap] = useState<Map<string, any> | null>(
     null
   );
@@ -18,6 +19,11 @@ export function useLocalization(
     if (!lang) return;
 
     import(`../../locales/${lang}.json`).then((translations) => {
+      if (!translations) {
+        setCurrentLang(import.meta.env.VITE_DEFAULT_LANG as string);
+        return;
+      }
+
       const translationObj = {
         ...translations.default,
         ...userTranslations,
@@ -25,7 +31,7 @@ export function useLocalization(
       const map = createFlattenedTranslationMap(translationObj);
       setTranslationMap(map);
     });
-  }, [lang]);
+  }, [currentLang]);
 
   function replaceWithParams(text: string, params: Record<string, string>) {
     return text.replace(/\${([^}]+)}/g, (_, key) => params[key] || '');
