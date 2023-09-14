@@ -1,11 +1,16 @@
 import { LocalizableText } from './components/LocalizableText';
 import { Stack } from './components/Stack';
+import {languageAtom} from "./store/language";
+import {useAtom} from "jotai";
 
 interface AppProps {
   fallbackLang: string;
 }
 
 function App({ fallbackLang = "en" }: AppProps) {
+  const [, setLang] = useAtom(languageAtom);
+  setLang(fallbackLang)
+
   return (
     <div className='container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8'>
       <h1>

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { createFlattenedTranslationMap } from './localization';
+import {useAtomValue} from "jotai";
+import {languageAtom} from "../../store/language";
 
 function getBrowserLang() {
   const lang = navigator.languages?.[0] ?? navigator.language;
@@ -10,6 +12,8 @@ export function useLocalization(
   lang = getBrowserLang(),
   userTranslations = {}
 ) {
+  const fallbackLang = useAtomValue(languageAtom)
+
   const [currentLang, setCurrentLang] = useState<string>(lang);
   const [translationMap, setTranslationMap] = useState<Map<string, any> | null>(
     null
@@ -26,7 +30,7 @@ export function useLocalization(
       const map = createFlattenedTranslationMap(translationObj);
       setTranslationMap(map);
     }).catch(() => {
-        setCurrentLang(import.meta.env.VITE_DEFAULT_LANGUAGE as string);
+        setCurrentLang(fallbackLang);
     });
   }, [currentLang]);
 
