@@ -11,8 +11,10 @@ export function LocalizableText({
   text,
   params,
   userTranslations = {},
-  lang = import.meta.env.VITE_LANG.toLowerCase(),
+  lang,
 }: LocalizableTextProps) {
   const { translate } = useLocalization(lang, userTranslations);
+  console.log('browser lang', navigator.language);
+
   return <>{translate(text, params)}</>;
 }

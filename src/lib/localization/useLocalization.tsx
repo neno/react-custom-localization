@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
 import { createFlattenedTranslationMap } from './localization';
 
+function getBrowserLang() {
+  const lang = navigator.languages?.[0] ?? navigator.language;
+  return lang.split('-')[0].toLocaleLowerCase();
+}
+
 export function useLocalization(
-  lang = import.meta.env.VITE_LANG.toLowerCase(),
+  lang = getBrowserLang(),
   userTranslations = {}
 ) {
   const [translationMap, setTranslationMap] = useState<Map<string, any> | null>(

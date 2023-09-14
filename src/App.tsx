@@ -1,16 +1,13 @@
 import { LocalizableText } from './components/LocalizableText';
 import { Stack } from './components/Stack';
 
-interface AppProps {
-  lang?: string;
-  userTranslations?: Record<string, any>;
-}
+const defaultBrowserLang = navigator.language;
 
 function App() {
   return (
     <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
       <h1>
-        <LocalizableText text='appTitle' />
+        <LocalizableText text='appTitle' />-<span>{defaultBrowserLang}</span>
       </h1>
       <main>
         <Stack>
