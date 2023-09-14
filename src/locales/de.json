@@ -1,5 +1,12 @@
 {
   "appTitle": "POC  Lokalisierung",
+  "localization": {
+    "simple": "Einfache Lokalisierung mit Standardsprache (Browsereinstellungen)",
+    "withParams": "Lokalisierung mit Parametern",
+    "withProvidedLang": "Lokalisierung mit definiertem Sprachparameter",
+    "withProvidedTranslations": "Lokalisierung mit benutzerdefinierten Übersetzungen",
+    "withNestedKey": "Lokalisierung mit verschachteltem Schlüssel"
+  },
   "simpleLocalization": "Einfache Lokalisierung mit Standardsprache (Browsereinstellungen)",
   "greeting": "Hallo",
   "localizationsWithParams": "Lokalisierung mit Parametern",

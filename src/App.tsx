@@ -3,6 +3,14 @@ import { Stack } from './components/Stack';
 
 const defaultBrowserLang = navigator.language;
 
+// "localization": {
+//   "simple": "Simple translation with default language (browser settings)",
+//   "withParams": "Localizations with paramaters",
+//   "withProvidedLang": "Localizations with provided language property",
+//   "withProvidedTranslations": "Localizations with provided translations",
+//   "withNestedKey": "Localizations with nested keys"
+// },
+
 function App() {
   return (
     <div className='container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8'>
@@ -13,7 +21,7 @@ function App() {
         <Stack>
           <section>
             <h2>
-              <LocalizableText text='simpleLocalization' />
+              <LocalizableText text='localization.simple' />
             </h2>
             <pre className='p-4 bg-neutral-200'>
               <code>{`<LocalizableText text='greeting' />`}</code>
@@ -24,7 +32,7 @@ function App() {
           </section>
           <section>
             <h2>
-              <LocalizableText text='localizationsWithParams' />
+              <LocalizableText text='localization.withParams' />
             </h2>
             <pre className='p-4 bg-neutral-200'>
               <code>{`<LocalizableText text='greetingWithNameAge' params={{ name: 'Andreas', age: 25 }} />`}</code>
@@ -38,7 +46,7 @@ function App() {
           </section>
           <section>
             <h2>
-              <LocalizableText text='localizationsWithProvidedLang' />
+              <LocalizableText text='localization.withProvidedLang' />
             </h2>
             <pre className='p-4 bg-neutral-200'>
               <code>{`<LocalizableText text='greeting' lang='de' />`}</code>
@@ -55,7 +63,7 @@ function App() {
           </section>
           <section>
             <h2>
-              <LocalizableText text='localizationsWithProvidedTranslations' />
+              <LocalizableText text='localization.withProvidedTranslations' />
             </h2>
             <pre className='p-4 bg-neutral-200'>
               <code>{`<LocalizableText text='greeting' translations={{ greeting: 'Guten Morgen' }} />`}</code>
@@ -65,6 +73,17 @@ function App() {
                 text='greeting'
                 translations={{ greeting: 'Guten Morgen' }}
               />
+            </p>
+          </section>
+          <section>
+            <h2>
+              <LocalizableText text='localization.withNestedKey' />
+            </h2>
+            <pre className='p-4 bg-neutral-200'>
+              <code>{`<LocalizableText text='contact.address.street' />`}</code>
+            </pre>
+            <p className='p-4 border-2'>
+              <LocalizableText text='contact.address.street' />
             </p>
           </section>
         </Stack>
