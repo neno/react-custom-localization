@@ -1,5 +1,9 @@
 {
+  "appTitle": "POC Localization",
+  "simpleTranslation": "Simple translation",
   "greeting": "Hello",
+  "translationsWithParams": "Translations with paramaters",
+  "greetingWithNameAge": "Hello {name}, you are {age} years old",
   "contact": {
     "firstName": "First name",
     "lastName": "Last name",

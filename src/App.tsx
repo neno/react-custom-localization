@@ -1,72 +1,46 @@
-import { useState } from 'react';
-import './App.css';
-import { translate } from './lib/localization/localization';
-import { useLocalization } from './lib/localization/useLocalization';
+import { LocalizableText } from './components/LocalizableText';
+import { Stack } from './components/Stack';
 
 interface AppProps {
   lang?: string;
   userTranslations?: Record<string, any>;
 }
 
-function App({
-  lang = 'de',
-  userTranslations = {
-    'contact.lastName': 'Familienname',
-  },
-}: AppProps) {
-  const [currentLanguage, setCurrentLanguage] = useState(lang);
-  // const [translatableKeys, setTranslatableKeys] = useState<{
-  //   [key: string]: string;
-  // }>({});
-  const { translate: translateFromHook } = useLocalization(
-    currentLanguage,
-    userTranslations
-  );
-
-  // async function goAndTranslate(key: string) {
-  //   const translation = await translate(key, currentLanguage);
-  //   setTranslatableKeys((prev) => ({
-  //     ...prev,
-  //     [key]: translation,
-  //   }));
-  // }
-
-  // function getTranslation(key: string) {
-  //   const translation = translatableKeys[key];
-  //   if (!translation) {
-  //     goAndTranslate(key);
-  //     return key;
-  //   }
-  //   return translation;
-  // }
-
+function App() {
   return (
-    <div className='App'>
-      <h1>Localizations</h1>
-      <section></section>
-      <section>
-        <h2>Nested translations</h2>
-        <form action=''>
-          <p>
-            <label>
-              {translate('contact.firstName', currentLanguage)}
-              <input type='text' name='firstName' id='firstName' />
-            </label>
-            {/* <label>
-              {getTranslation('contact.lastName')}
-              <input type='text' name='lastName' id='lastName' />
-            </label> */}
-            <label>
-              {translateFromHook('contact.address.city')}
-              <input type='text' name='city' id='city' />
-            </label>
-            <label>
-              {translateFromHook('contact.lastName')}
-              <input type='text' name='lastName' id='lastName' />
-            </label>
-          </p>
-        </form>
-      </section>
+    <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
+      <h1>
+        <LocalizableText text='appTitle' />
+      </h1>
+      <main>
+        <Stack>
+          <section>
+            <h2>
+              <LocalizableText text='simpleTranslation' />
+            </h2>
+            <pre className='p-4 bg-neutral-200'>
+              <code>{`<LocalizableText text='greeting' />`}</code>
+            </pre>
+            <p className='p-4 border-2'>
+              <LocalizableText text='greeting' />
+            </p>
+          </section>
+          <section>
+            <h2>
+              <LocalizableText text='translationsWithParams' />
+            </h2>
+            <pre className='p-4 bg-neutral-200'>
+              <code>{`<LocalizableText text='greetingWithNameAge' params={{ name: 'Andreas', age: 25 }} />`}</code>
+            </pre>
+            <p className='p-4 border-2'>
+              <LocalizableText
+                text='greetingWithNameAge'
+                params={{ name: 'Andreas', age: 25 }}
+              />
+            </p>
+          </section>
+        </Stack>
+      </main>
     </div>
   );
 }
