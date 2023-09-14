@@ -1,21 +1,15 @@
 import { LocalizableText } from './components/LocalizableText';
 import { Stack } from './components/Stack';
 
-const defaultBrowserLang = navigator.language;
+interface AppProps {
+  fallbackLang: string;
+}
 
-// "localization": {
-//   "simple": "Simple translation with default language (browser settings)",
-//   "withParams": "Localizations with paramaters",
-//   "withProvidedLang": "Localizations with provided language property",
-//   "withProvidedTranslations": "Localizations with provided translations",
-//   "withNestedKey": "Localizations with nested keys"
-// },
-
-function App() {
+function App({ fallbackLang = "en" }: AppProps) {
   return (
     <div className='container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8'>
       <h1>
-        <LocalizableText text='appTitle' />-<span>{defaultBrowserLang}</span>
+        <LocalizableText text='appTitle' />
       </h1>
       <main>
         <Stack>
