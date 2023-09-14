@@ -19,17 +19,14 @@ export function useLocalization(
     if (!currentLang) return;
 
     import(`../../locales/${currentLang}.json`).then((translations) => {
-      if (!translations) {
-        setCurrentLang(import.meta.env.VITE_DEFAULT_LANG as string);
-        return;
-      }
-
       const translationObj = {
         ...translations.default,
         ...userTranslations,
       };
       const map = createFlattenedTranslationMap(translationObj);
       setTranslationMap(map);
+    }).catch(() => {
+        setCurrentLang(import.meta.env.VITE_DEFAULT_LANGUAGE as string);
     });
   }, [currentLang]);
 
