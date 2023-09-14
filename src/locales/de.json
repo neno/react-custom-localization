@@ -1,9 +1,11 @@
 {
   "appTitle": "POC  Lokalisierung",
-  "simpleTranslation": "Einfache Übersetzung",
+  "simpleLocalization": "Einfache Lokalisierung mit Standardsprache (Browsereinstellungen)",
   "greeting": "Hallo",
-  "translationsWithParams": "Übersetzungen mit Parametern",
+  "localizationsWithParams": "Lokalisierung mit Parametern",
   "greetingWithNameAge": "Hallo ${name}, du bist ${age} Jahre alt",
+  "localizationsWithProvidedLang": "Lokalisierung mit definiertem Sprachparameter",
+  "localizationsWithProvidedTranslations": "Lokalisierung mit benutzerdefinierten Übersetzungen",
   "contact": {
     "firstName": "Vorname",
     "lastName": "Nachname",

@@ -4,16 +4,16 @@ interface LocalizableTextProps {
   text: string;
   params?: Record<string, any>;
   lang?: string;
-  userTranslations?: Record<string, any>;
+  translations?: Record<string, any>;
 }
 
 export function LocalizableText({
   text,
   params,
-  userTranslations = {},
+  translations = {},
   lang,
 }: LocalizableTextProps) {
-  const { translate } = useLocalization(lang, userTranslations);
+  const { translate } = useLocalization(lang, translations);
   console.log('browser lang', navigator.language);
 
   return <>{translate(text, params)}</>;
